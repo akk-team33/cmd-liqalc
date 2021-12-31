@@ -5,21 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>de.team33.cmd</groupId>
-        <artifactId>cmd-mm-template</artifactId>
+        <groupId>de.team33.liqalc</groupId>
+        <artifactId>liqalc-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>template-app</artifactId>
+    <artifactId>liqalc-cmd</artifactId>
     <packaging>jar</packaging>
 
-    <name>Team33 CMD MM Template - application</name>
-    <description>Application module of a command-line multi-module template</description>
+    <name>Team33 Liquid Calculator CMD</name>
+    <description>Liquid calculator command-line-tool</description>
 
     <dependencies>
         <dependency>
-            <groupId>de.team33.cmd</groupId>
-            <artifactId>template-lib</artifactId>
+            <groupId>de.team33.liqalc</groupId>
+            <artifactId>liqalc-lib</artifactId>
         </dependency>
 
         <dependency>
@@ -50,7 +50,7 @@
                             <archive>
                                 <manifest>
                                     <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                    <mainClass>net.team33.order.Main</mainClass>
+                                    <mainClass>de.team33.liqalc.cmd.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptors>
