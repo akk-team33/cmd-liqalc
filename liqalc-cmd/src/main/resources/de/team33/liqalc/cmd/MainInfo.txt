@@ -1,0 +1,23 @@
+------------------------------------------------------------------------
+Team33 Liquid Calculator - de.team33.liqalc - version ${project.version}
+------------------------------------------------------------------------
+
+Parameters: COMMAND P2 [P3 [...]]
+
+COMMAND:
+
+    repo            get or update the repository of basic compounds
+
+        P2:
+        <missing>                   get the repository of basic compounds and output to console
+        <path to missing file>      get the repository of basic compounds and output to new file
+        <path to existing file>     put the content to the repository of basic compounds
+
+    calc            calculate a compound
+
+        P2:
+        <path to existing file>     the input to be calculated
+
+        P3:
+        <missing>                   output to console
+        <path to file>              output to the file (create if new, overwrite if existing)
