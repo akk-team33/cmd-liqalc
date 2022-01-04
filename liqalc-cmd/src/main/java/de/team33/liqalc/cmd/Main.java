@@ -36,42 +36,42 @@ public class Main {
 
     public static int main(final String... args) throws IOException {
         if (1 > args.length) {
-            printMainInfo();
+            return printMainInfo();
         } else if (args[0].equals(Command.repo.name())) {
-            doRepoCommand(args);
+            return doRepoCommand(args);
         } else if (args[0].equals(Command.calc.name())) {
-            doCalcCommand(args);
+            return doCalcCommand(args);
         } else {
             throw new UnsupportedOperationException("not yet implemented");
         }
-        return 0;
     }
 
-    private static void doCalcCommand(final String[] args) {
+    private static int doCalcCommand(final String[] args) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
-    private static void doRepoCommand(final String[] args) throws IOException {
+    private static int doRepoCommand(final String[] args) throws IOException {
         if (2 > args.length) {
-            doRepoCommandGet(System.out);
+            return doRepoCommandGet(System.out);
         } else {
             final Path path = Paths.get(args[1]).toAbsolutePath().normalize();
-            doRepoCommand(path);
+            return doRepoCommand(path);
         }
     }
 
-    private static void doRepoCommand(final Path path) throws IOException {
+    private static int doRepoCommand(final Path path) throws IOException {
         if (Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
-            doRepoCommandUpdate(path);
+            return doRepoCommandUpdate(path);
         } else {
-            doRepoCommandGet(path);
+            return doRepoCommandGet(path);
         }
     }
 
-    private static void doRepoCommandGet(final Path path) throws IOException {
+    private static int doRepoCommandGet(final Path path) throws IOException {
         try (final BufferedWriter out = Files.newBufferedWriter(path, UTF_8, CREATE_NEW)) {
             doRepoCommandGet(out);
         }
+        return 2;
     }
 
     private static void doRepoCommandGet(final Writer out) throws IOException {
@@ -80,15 +80,19 @@ public class Main {
         out.flush();
     }
 
-    private static void doRepoCommandUpdate(final Path path) {
-        throw new UnsupportedOperationException("not yet implemented");
+    private static int doRepoCommandUpdate(final Path path) throws IOException {
+        final Repository repo = Repository.read(path);
+        Repository.write(repo);
+        return 3;
     }
 
-    private static void doRepoCommandGet(final OutputStream out) throws IOException {
+    private static int doRepoCommandGet(final OutputStream out) throws IOException {
         doRepoCommandGet(new OutputStreamWriter(out, UTF_8));
+        return 1;
     }
 
-    private static void printMainInfo() {
+    private static int printMainInfo() {
         System.out.println(MAIN_INFO);
+        return 0;
     }
 }

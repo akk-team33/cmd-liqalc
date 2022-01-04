@@ -2,13 +2,16 @@ package de.team33.liqalc.lib.e1;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import de.team33.liqalc.lib.e1.json.CompoundDTO;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +31,17 @@ public class Repository {
                                           .toAbsolutePath()
                                           .normalize();
     private static final Repository DEFAULT = new Repository(new HashMap<>() {{
-        put("PG (99,5%)", new Compound(Substance.PG, 995).add(Substance.H2O, 5));
-        put("VG (99,5%)", new Compound(Substance.VG, 995).add(Substance.H2O, 5));
-        put("H2O", new Compound(Substance.H2O, 1));
+        put("PG (99,5%)", CompoundDTO.builder()
+                                     .add(Substance.PG, 995)
+                                     .add(Substance.H2O, 5)
+                                     .build());
+        put("VG (99,5%)", CompoundDTO.builder()
+                                     .add(Substance.VG, 995)
+                                     .add(Substance.H2O, 5)
+                                     .build());
+        put("Aqua dest.", CompoundDTO.builder()
+                                     .add(Substance.H2O, 1)
+                                     .build());
     }});
 
     static {
@@ -42,9 +53,9 @@ public class Repository {
         }
     }
 
-    private final Map<String, Compound> compounds;
+    private final Map<String, CompoundDTO> compounds;
 
-    public Repository(final Map<String, Compound> compounds) {
+    public Repository(final Map<String, CompoundDTO> compounds) {
         this.compounds = Collections.unmodifiableMap(new TreeMap<>(compounds));
     }
 
@@ -64,5 +75,15 @@ public class Repository {
 
     public static void write(final Repository repository, final Writer out) {
         GSON.toJson(repository, out);
+    }
+
+    public static void write(final Repository repository, final Path path) throws IOException {
+        try (final BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE)) {
+            write(repository, writer);
+        }
+    }
+
+    public static void write(final Repository repository) throws IOException {
+        write(repository, PATH);
     }
 }
