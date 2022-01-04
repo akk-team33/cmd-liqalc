@@ -3,6 +3,7 @@ package de.team33.liqalc.lib.e1;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.team33.liqalc.lib.e1.json.CompoundDTO;
+import de.team33.liqalc.lib.e1.json.RepositoryDTO;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class RepositoryUtil {
                                           .resolve("default.liqalc.repo")
                                           .toAbsolutePath()
                                           .normalize();
-    private static final Repository DEFAULT = new Repository(new HashMap<>() {{
+    private static final RepositoryDTO DEFAULT = new RepositoryDTO(new HashMap<>() {{
         put("PG (99,5%)", CompoundDTO.builder()
                                      .add(Substance.PG, 995)
                                      .add(Substance.H2O, 5)
@@ -51,31 +52,31 @@ public class RepositoryUtil {
         }
     }
 
-    public static Repository read() throws IOException {
+    public static RepositoryDTO read() throws IOException {
         return Files.exists(PATH) ? read(PATH) : DEFAULT;
     }
 
-    public static Repository read(final Path path) throws IOException {
+    public static RepositoryDTO read(final Path path) throws IOException {
         try (final Reader reader = Files.newBufferedReader(path, UTF_8)) {
             return read(reader);
         }
     }
 
-    public static Repository read(final Reader reader) {
-        return GSON.fromJson(reader, Repository.class);
+    public static RepositoryDTO read(final Reader reader) {
+        return GSON.fromJson(reader, RepositoryDTO.class);
     }
 
-    public static void write(final Repository repository, final Writer out) {
+    public static void write(final RepositoryDTO repository, final Writer out) {
         GSON.toJson(repository, out);
     }
 
-    public static void write(final Repository repository, final Path path) throws IOException {
+    public static void write(final RepositoryDTO repository, final Path path) throws IOException {
         try (final BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.CREATE)) {
             write(repository, writer);
         }
     }
 
-    public static void write(final Repository repository) throws IOException {
+    public static void write(final RepositoryDTO repository) throws IOException {
         write(repository, PATH);
     }
 }
