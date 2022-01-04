@@ -1,6 +1,7 @@
 package de.team33.liqalc.cmd;
 
 import de.team33.liqalc.lib.e1.Repository;
+import de.team33.liqalc.lib.e1.RepositoryUtil;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -75,14 +76,14 @@ public class Main {
     }
 
     private static void doRepoCommandGet(final Writer out) throws IOException {
-        final Repository repository = Repository.read();
-        Repository.write(repository, out);
+        final Repository repository = RepositoryUtil.read();
+        RepositoryUtil.write(repository, out);
         out.flush();
     }
 
     private static int doRepoCommandUpdate(final Path path) throws IOException {
-        final Repository repo = Repository.read(path);
-        Repository.write(repo);
+        final Repository repo = RepositoryUtil.read(path);
+        RepositoryUtil.write(repo);
         return 3;
     }
 
