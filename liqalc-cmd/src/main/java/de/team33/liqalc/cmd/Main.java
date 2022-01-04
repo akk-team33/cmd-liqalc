@@ -1,7 +1,7 @@
 package de.team33.liqalc.cmd;
 
 import de.team33.liqalc.lib.e1.json.RepositoryDTO;
-import de.team33.liqalc.lib.e1.RepositoryUtil;
+import de.team33.liqalc.lib.e1.json.RepositoryUtil;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

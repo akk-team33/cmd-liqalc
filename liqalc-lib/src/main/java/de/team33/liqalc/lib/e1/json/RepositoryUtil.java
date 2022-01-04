@@ -1,9 +1,8 @@
-package de.team33.liqalc.lib.e1;
+package de.team33.liqalc.lib.e1.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import de.team33.liqalc.lib.e1.json.CompoundDTO;
-import de.team33.liqalc.lib.e1.json.RepositoryDTO;
+import de.team33.liqalc.lib.e1.Substance;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
