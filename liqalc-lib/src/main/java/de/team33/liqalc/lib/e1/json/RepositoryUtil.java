@@ -23,11 +23,6 @@ public class RepositoryUtil {
     private static final Class<RepositoryUtil> CLASS = RepositoryUtil.class;
     private static final Logger LOG = Logger.getLogger(CLASS.getCanonicalName());
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path PATH = Paths.get(System.getProperty("user.home"))
-                                          .resolve("." + CLASS.getPackageName())
-                                          .resolve("default.liqalc.repo")
-                                          .toAbsolutePath()
-                                          .normalize();
     private static final RepositoryDTO DEFAULT = new RepositoryDTO(new HashMap<>() {{
         put("PG (99,5%)", CompoundDTO.builder()
                                      .add(Substance.PG, 995)
@@ -42,17 +37,27 @@ public class RepositoryUtil {
                                      .build());
     }});
 
+    public static final Path CONFIG_PATH = Paths.get(System.getProperty("user.home"))
+                                              .resolve("." + CLASS.getPackageName())
+                                              .toAbsolutePath()
+                                              .normalize();
+    public static final Path REPO_PATH = CONFIG_PATH.resolve("default.liqalc.repo");
+
     static {
-        final Path parent = PATH.getParent();
+        final Path parent = REPO_PATH.getParent();
         try {
             Files.createDirectories(parent);
         } catch (final IOException e) {
-            LOG.log(Level.SEVERE, e, () -> "<%s> doesn't exist!".formatted(parent));
+            LOG.log(Level.SEVERE, e, () -> "Application configuration path <%s> doesn't exist!".formatted(parent));
         }
     }
 
+    public static void reset() throws IOException {
+        Files.deleteIfExists(REPO_PATH);
+    }
+
     public static RepositoryDTO read() throws IOException {
-        return Files.exists(PATH) ? read(PATH) : DEFAULT;
+        return Files.exists(REPO_PATH) ? read(REPO_PATH) : DEFAULT;
     }
 
     public static RepositoryDTO read(final Path path) throws IOException {
@@ -76,6 +81,6 @@ public class RepositoryUtil {
     }
 
     public static void write(final RepositoryDTO repository) throws IOException {
-        write(repository, PATH);
+        write(repository, REPO_PATH);
     }
 }
