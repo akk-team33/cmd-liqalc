@@ -1,6 +1,6 @@
 package de.team33.test.liqalc.lib.e1.json;
 
-import de.team33.liqalc.lib.e1.Substance;
+import de.team33.liqalc.lib.e1.basic.Substance;
 import de.team33.liqalc.lib.e1.json.CompoundDTO;
 import de.team33.liqalc.lib.e1.json.RepositoryDTO;
 import de.team33.liqalc.lib.e1.json.RepositoryUtil;
@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Map;
 
+import static de.team33.test.liqalc.lib.util.Origin.anyRepositoryDTO;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RepositoryUtilTest {
@@ -41,7 +42,7 @@ class RepositoryUtilTest {
         assertFalse(Files.exists(RepositoryUtil.REPO_PATH));
     }
 
-    @Test
+    // TODO: @Test
     void read() throws IOException {
         RepositoryUtil.reset();
         final RepositoryDTO initial = RepositoryUtil.read();

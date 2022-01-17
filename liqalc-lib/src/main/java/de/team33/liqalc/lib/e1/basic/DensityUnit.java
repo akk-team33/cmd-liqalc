@@ -1,4 +1,4 @@
-package de.team33.liqalc.lib.e1;
+package de.team33.liqalc.lib.e1.basic;
 
 public enum DensityUnit {
 

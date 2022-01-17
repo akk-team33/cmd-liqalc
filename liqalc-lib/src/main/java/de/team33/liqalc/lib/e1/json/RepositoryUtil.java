@@ -2,7 +2,7 @@ package de.team33.liqalc.lib.e1.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import de.team33.liqalc.lib.e1.Substance;
+import de.team33.liqalc.lib.e1.basic.Substance;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

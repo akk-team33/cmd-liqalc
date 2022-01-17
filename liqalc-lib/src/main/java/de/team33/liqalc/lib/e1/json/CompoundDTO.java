@@ -1,6 +1,6 @@
 package de.team33.liqalc.lib.e1.json;
 
-import de.team33.liqalc.lib.e1.Substance;
+import de.team33.liqalc.lib.e1.basic.Substance;
 
 import java.util.AbstractMap;
 import java.util.EnumMap;

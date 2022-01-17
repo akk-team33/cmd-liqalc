@@ -1,6 +1,6 @@
 package de.team33.test.liqalc.lib.util;
 
-import de.team33.liqalc.lib.e1.Substance;
+import de.team33.liqalc.lib.e1.basic.Substance;
 import de.team33.liqalc.lib.e1.json.CompoundDTO;
 import de.team33.liqalc.lib.e1.json.RepositoryDTO;
 import de.team33.patterns.production.e1.FactoryUtil;
