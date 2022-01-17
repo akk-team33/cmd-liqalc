@@ -41,6 +41,7 @@
     <modules>
         <module>liqalc-lib</module>
         <module>liqalc-cmd</module>
+        <module>liqalc-app</module>
     </modules>
 
     <dependencyManagement>
